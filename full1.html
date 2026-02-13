@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portfolio</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ABE2, #5563DE);
+    margin: 0;
+    padding: 0;
+}
+
+.login-box {
+    width: 350px;
+    margin: 120px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #5563DE;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background: #3949ab;
+}
+
+#error {
+    color: red;
+    text-align: center;
+    display: none;
+}
+
+.page {
+    display: none;
+    background: #f4f6f9;
+    min-height: 100vh;
+}
+
+.header {
+    background: #5563DE;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.profile {
+    width: 650px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.profile img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 3px solid #5563DE;
+}
+
+.info {
+    text-align: left;
+    margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="login-box" id="login">
+    <h2>Student Login</h2>
+    <input type="text" id="roll" placeholder="Roll Number">
+    <input type="date" id="dob">
+    <button onclick="login()">Login</button>
+    <p id="error">Invalid Roll Number or DOB</p>
+</div>
+
+<div class="page" id="portfolio">
+    <div class="header">My Portfolio</div>
+
+    <div class="profile">
+        <img id="photo" src="saravana.jpg">
+        <h2 id="name"></h2>
+        <p id="course"></p>
+
+        <div class="info">
+            <p><b>Roll No:</b> <span id="rno"></span></p>
+            <p><b>Gender:</b> <span id="gender"></span></p>
+            <p><b>DOB:</b> <span id="sdob"></span></p>
+            <p><b>Email:</b> <span id="email"></span></p>
+            <p><b>LinkedIn:</b> <span id="linkedin"></span></p>
+            <p><b>GitHub:</b> <span id="github"></span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+function login() {
+    var roll = document.getElementById("roll").value.toUpperCase();
+    var dob = document.getElementById("dob").value;
+
+    if (roll === "23UAD059" && dob === "2004-05-16") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("portfolio").style.display = "block";
+
+        document.getElementById("name").innerText = "SARAVANAKUMAR";
+        document.getElementById("course").innerText = "AI & DS";
+        document.getElementById("rno").innerText = "23UAD059";
+        document.getElementById("gender").innerText = "Male";
+        document.getElementById("sdob").innerText = "2004-05-16";
+        document.getElementById("email").innerText = "sk@gmail.com";
+        document.getElementById("linkedin").innerText = "linkedin.com/in/yourprofile";
+        document.getElementById("github").innerText = "github.com/yourgithub";
+    } 
+    else {
+        document.getElementById("error").style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
