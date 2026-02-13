@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quiz App</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+body{font-family:sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);
+display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+.box{background:#fff;width:450px;padding:20px;border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,.2)}
+h2{text-align:center;color:#764ba2}
+label{display:block;background:#f3f3ff;padding:6px;margin:5px 0;border-radius:6px}
+button{padding:6px 12px;margin:5px;border:none;border-radius:15px;cursor:pointer}
+#prev{background:#ff9a9e;color:#fff}
+#next{background:#36d1dc;color:#fff}
+#restart{background:#764ba2;color:#fff;display:none}
+.done{color:green;font-weight:bold;text-align:center;margin-top:10px}
+.err{color:red;text-align:center}
+</style>
+</head>
+
+<body>
+<div class="box">
+<h2>🌈 Quiz</h2>
+<div id="q"></div>
+<div id="ops"></div>
+<div style="text-align:center">
+<button id="prev">Prev</button>
+<button id="next">Next</button>
+</div>
+<div class="err"></div>
+<div class="done"></div>
+<button id="restart">Restart</button>
+</div>
+
+<script>
+$(function(){
+const quiz=[
+{q:"HTML is?",o:["Prog","Markup","DB","OS"],a:1},
+{q:"CSS used for?",o:["Logic","Style","DB","Server"],a:1},
+{q:"jQuery is?",o:["Library","Lang","Server","DB"],a:0}
+];
+let i=0,ans=[];
+
+const load=()=>{
+$(".err").text("");
+$("#q").text((i+1)+". "+quiz[i].q);
+$("#ops").html(quiz[i].o.map((v,x)=>
+`<label><input type=radio name=o value=${x} ${ans[i]==x?"checked":""}> ${v}</label>`
+).join(""));
+$("#prev").prop("disabled",!i);
+$("#next").text(i==quiz.length-1?"Submit":"Next");
+};
+
+$("#next").click(()=>{
+let s=$("input[name=o]:checked").val();
+if(s==null)return $(".err").text("Select an answer!");
+ans[i]=+s;
+i<quiz.length-1? (i++,load()):
+$(".box > *").hide(),
+$(".done").text("Score: "+ans.filter((v,x)=>v==quiz[x].a).length+"/"+quiz.length).show(),
+$("#restart").show();
+});
+
+$("#prev").click(()=>{if(i){i--;load()}});
+$("#restart").click(()=>{i=0;ans=[];$(".box>*").show();$(".done").text("");load()});
+
+load();
+});
+</script>
+</body>
+</html>
